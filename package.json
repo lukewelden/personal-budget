@@ -1,16 +1,19 @@
 {
   "name": "personal-budget",
   "version": "0.0.0",
+  "description": "Codecademy Portfolio Project: An API that allows clients to create and manage a personal budget using Envelope Budgeting principles.",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
+  "author": "Luke Welden",
+  "license": "MIT",
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "^4.18.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "pug": "^3.0.2"
   }
 }
