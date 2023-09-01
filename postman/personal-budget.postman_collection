@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "a5949314-b232-4e38-a74f-d83f2105af09",
+		"name": "Personal Budget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22871059"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET /",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /envelope",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/envelope/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /envelope",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\": \"Bills\",\r\n    \"budget\": 200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/envelope",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /envelope/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/envelope/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /envelope/:envelopeId/:subtractAmount",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/envelope/3/250",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope",
+						"3",
+						"250"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /envelope/:envelopeId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/envelope",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /envelope/:envelopId/:toEnvelopeId/:subtractAmount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/envelope/transfer/1/3/200",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"envelope",
+						"transfer",
+						"1",
+						"3",
+						"200"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

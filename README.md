@@ -1,5 +1,6 @@
 # 📊 Personal Budget API
 ![GitHub top language](https://img.shields.io/github/languages/top/lukewelden/personal-budget)
+
 Hey there, fellow developers and budgeting enthusiasts! Welcome to the exciting world of personal budget management brought to you by the Personal Budget API. Get ready to take control of your finances and build a seamless budgeting experience using this powerful API.
 
 ## 🚀 Project Intro
@@ -20,41 +21,44 @@ This API isn't just about numbers and endpoints; it's about taking charge of you
 
 - **Testing with Postman:** Before you ask, yes, I'll be extensively testing the API endpoints using Postman. It's all about delivering a robust and bug-free experience.
 
-## 🔧 Prerequisites
-Before you begin, ensure you have the following prerequisites in place:
-
-- Familiarity with command line usage and file navigation.
-- Proficiency in JavaScript programming.
-- Understanding of Node.js and its ecosystem.
-- Knowledge of the Express framework for building web applications.
-- Experience with Git for version control and GitHub for collaborative development.
-- Basic understanding of API testing using Postman.
-
-
 ## 🤝 Getting Started
 If you're as excited as I am (and I know you are), here's what you can do to get started:
 
-1. **Clone the Repository:** Get your hands on the code by cloning the repository: git clone https://github.com/your-username/personal-budget-api.git
+1. **Clone the Repository:** Get your hands on the code by cloning the repository: `git clone https://github.com/your-username/personal-budget-api.git`
 
-2. **Navigate and Install:** Hop into the project directory and install the necessary dependencies: cd personal-budget-api && npm install
+2. **Navigate and Install:** Hop into the project directory and install the necessary dependencies: `cd personal-budget-api && npm install`
 
-3. **Start Building:** Fire up the development server and start building your budgeting masterpiece: npm start
+3. **Start Building:** Fire up the development server and start building your budgeting masterpiece: `npm start`
 
 ## 🌐 API Endpoints
 - `GET /envelopes`: Retrieve a list of all budget envelopes.
-- `GET /envelopes/:id`: Retrieve details of a specific envelope by its ID.
-- `POST /envelopes`: Create a new budget envelope.
-- `PUT /envelopes/:id`: Update the details of a specific envelope.
+- `GET /envelopes/:envelopeId`: Retrieve details of a specific envelope by its ID.
+- `POST /envelopes`: Create a new budget envelope by sending a body of: 
+  ```json 
+  {
+    "category": string,
+    "budget": int  
+  } 
+  ```
+- `PUT /envelopes/:envelopeId/:subtractAmount`: Subtract an amount of money from an envelope.
 - `DELETE /envelopes/:id`: Delete a budget envelope.
   Additionally, there will be endpoints for managing envelope balances.
+- `POST /envelopes/:envelopeId/:toEnvelopeId/:subtractAmount`: transfer an amount of money from one budget envelope to another. 
 
 ## 👷‍♀️ Testing
-Use Postman to test and interact with the API endpoints. You can import the provided Postman collection to get started quickly.
+Use Postman to test and interact with the API endpoints. You can import the provided Postman collection (`./postman/personal-budget.postman_collection`) to get started quickly.
 
 ## 🔥 Join the Budgeting Adventure
 I invite you to embark on this budgeting adventure with me. As I dive into Node.js, Express, Git, and more, you'll witness the creation of an API that's not just lines of code, but a tool that can truly transform how we manage our finances.
 
 Stay curious, keep coding, and let's make budgeting a breeze together!
+
+## Technologies
+- HTML <img src="./public/images/icons8-html-48.png" alt="HTML Favicon" width="16" height="16">
+- CSS <img src="./public/images/icons8-css-100.png" alt="CSS Favicon" width="16" height="16">
+- JavaScript <img src="./public/images/icons8-javascript-48.png" alt="JavaScript Favicon" width="16" height="16">
+- Node <img src="./public/images/icons8-node-js-48.png" alt="HTML Favicon" width="16" height="16">
+- Express <img src="./public/images/icons8-express-js-40.png" alt="HTML Favicon" width="16" height="16">
 
 ## 📋 Resources
 - [Node.js Documentation](https://nodejs.org/documentation)

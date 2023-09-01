@@ -7,7 +7,7 @@ let id = 0;
 /* Middleware to take the envelopeId from a request and check if an object with that if exists in budgetEnvelopes array*/
 router.param('envelopeId', (req, res, next, id) => {
   if (isNaN(id)) {
-    res.status(400).send('Please provide a whole number')
+    res.status(400).send('Please provide a whole number for the envelopeId')
     next();
   }
   const envelopeId = Number(id);
@@ -23,7 +23,7 @@ router.param('envelopeId', (req, res, next, id) => {
 /* Middleware to take the toEnvelopeId from a request and check if an object with that if exists in budgetEnvelopes array*/
 router.param('toEnvelopeId', (req, res, next, id) => {
   if (isNaN(id)) {
-    res.status(400).send('Please provide a whole number')
+    res.status(400).send('Please provide a whole number for the toEnvelopeId')
     next();
   }
   const toEnvelopeId = Number(id);
@@ -35,6 +35,16 @@ router.param('toEnvelopeId', (req, res, next, id) => {
     next();
   }
 });
+
+/* Middleware that checks if the subtractAmount parameter is a number and attaches is as a property to the req object */
+router.param('subtractAmount', (req, res, next, id) => {
+  if (isNaN(id)) {
+    res.status(400).send('Please provide a whole number')
+  } else {
+    req.subtractAmount = Number(id);
+  }
+  next();
+})
 
 /* Middleware that checks the body of a http request to ensure it has the correct properties before posting to
 budgetEnvelopes array */
@@ -58,16 +68,6 @@ function envelopeValidation(req, res, next) {
   next();
 }
 
-/* Middleware that checks if the subtractAmount parameter is a number and attaches is as a property to the req object */
-router.param('subtractAmount', (req, res, next, id) => {
-  if (isNaN(id)) {
-    res.status(400).send('Please provide a whole number')
-  } else {
-    req.subtractAmount = Number(id);
-  }
-  next();
-})
-
 /* GET all budget envelops */
 router.get('/', (req, res) => {
   res.status(200).send(budgetEnvelopes);
@@ -88,7 +88,6 @@ router.get('/:envelopeId', (req, res) => {
 
 /* PUT request to update a budget envelope */
 router.put('/:envelopeId/:subtractAmount', (req, res) => {
-  console.log(req.envelopeI)
   const newBudgetValue = budgetEnvelopes[req.envelopeIndex]['budget'] - req.subtractAmount;
   if (newBudgetValue < 0 ) {
     res.status(400).send('Not enough money in the budget')
@@ -105,21 +104,17 @@ router.delete('/:envelopeId', (req, res) => {
 });
 
 /* POST to take transfer from one budget envelope to another */
-router.post('/transfer/:envelopeId/:toEnvelopeId/:subtractAmount', (res, req) => {
-  console.log(req.envelopeIndex);
-  console.log(req.toEnvelopeIndex);
-  res.status(200).send()
-  /*
-  const subtractingBudgetValue = budgetEnvelopes[req.envelopeIndex]['budget'] - req.subtractAmount;
-  const addingBudgetValue = budgetEnvelopes[req.toEnvelopeIndex]['budget'] + req.subtractAmount;
-  if (subtractingBudgetValue < 0 ) {
-    res.status(400).send('Not enough money in the budget')
-  } else {
-    budgetEnvelopes[req.envelopeIndex]['budget'] = subtractingBudgetValue;
-    budgetEnvelopes[req.toEnvelopeIndex]['budget'] = addingBudgetValue;
-    res.status(200).send(budgetEnvelopes[req.envelopeIndex] + budgetEnvelopes[req.toEnvelopeIndex]);
-  }
-  */
-})
+router.post('/transfer/:envelopeId/:toEnvelopeId/:subtractAmount',
+    (req, res) => {
+      const subtractingBudgetValue = budgetEnvelopes[req.envelopeIndex]['budget'] - req.subtractAmount;
+      const addingBudgetValue = budgetEnvelopes[req.toEnvelopeIndex]['budget'] + req.subtractAmount;
+      if (subtractingBudgetValue < 0 ) {
+        res.status(400).send('Not enough money in the budget to transfer')
+      } else {
+        budgetEnvelopes[req.envelopeIndex]['budget'] = subtractingBudgetValue;
+        budgetEnvelopes[req.toEnvelopeIndex]['budget'] = addingBudgetValue;
+        res.status(201).send('transfer completed.');
+      }
+    });
 
 module.exports = router;
